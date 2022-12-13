@@ -1,13 +1,405 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  background-color: #292a2b;
+  height: 100%;
+}
+
+.settings-text {
+  margin: 0 0 15px;
+  font-family: "Karla";
+  font-size: 16px;
+}
+
+.settings-text-container {
+  width: 180px;
+}
+
+.modify-settings {
+  font-family: "Karla";
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 19px;
+  color: #dd2f38;
+}
+
+.landing-container {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-wrapper {
+  overflow: auto;
+}
+
+.customize-container {
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+
+.custom-quizzical {
+  max-width: 35px;
+  position: absolute;
+  right: 8px;
+  top: 20px;
+  filter: opacity(0.6) drop-shadow(0 0 0 blue);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  opacity: 0;
+  width: 30px;
+  height: 5px;
+  background-color: #312e6a;
+  margin:6px 0;
+  transition: 0.4s;
+}
+
+.visible > .bar1 {
+  opacity: 1;
+  transform: translate(0, 11px) rotate(-45deg);
+}
+
+.visible > .bar3 {
+  opacity: 1;
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+.custom-quizzical.visible {
+  filter: opacity(0);
+  transition: .4s;
+}
+
+.quiz-menu-header {
+  margin: 0 0 15px;
+  color: #dd2f38;
+}
+
+.quiz-menu {
+  display: flex;
+  position: fixed;
+  right: -120%;
+  top: 55px;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  transition: 0.4s;
+  box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.quiz-menu.on-screen {
+  right: calc(200px - 100vw);
+}
+
+.input-box {
+  width: 100%;
+  max-width: 150px;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius:10px;
+  border: 1px solid #eee;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+}
+
+label {
+  font-family: "Karla";
+}
+
+.input-box.active {
+  transition: none;
+  border: 1px solid red;
+}
+
+.input-box.active:focus {
+  outline: none;
+  border: 1px solid red;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  background-color: #dd2f38;
+  color: white;
+  cursor: pointer;
+}
+
+.yellow-blob {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: -1;
+  border-radius: 55% 45% 59% 41% / 32% 51% 49% 68%;
+  right: -100px;
+  top: -150px;
+  background-color: #fefad1;
+}
+
+.blue-blob {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: -1;
+  border-radius: 50% 60% 70% 40% / 20% 40% 60% 40%;
+  left: -70px;
+  bottom: -150px;
+  background-color: #deebf8;
+}
+
+.yellow-blob-settings {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: -1;
+  border-radius: 55% 45% 59% 41% / 32% 51% 49% 68%;
+  bottom: -150px;
+  left: -150px;
+  background-color: #fefad1;
+}
+
+.blue-blob-settings {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: -1;
+  border-radius: 55% 45% 59% 41% / 32% 51% 49% 68%;
+  top: -250px;
+  background-color: #deebf8;
+}
+
+.quizzical-logo {
+  max-width: 100px;
+  width: 100%;
+  margin-bottom: 10px;
+  filter: invert(87%) sepia(6%) saturate(780%) hue-rotate(195deg)
+    brightness(101%) contrast(70%);
+}
+
+.footer {
+  font-family: "Karla", sans-serif;
+  font-weight: 400;
+  position: absolute;
+  bottom: 0;
+  height: 1.6rem;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-content: center;
+  color: #dd2f38;
+  left: 0;
+  right: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #dd2f38;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.content {
+  max-width: 300px;
+  padding: 15px;
+  margin-bottom: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.content h1 {
+  margin: 0;
+  color: #dd2f38;
+  font-weight: 600;
+  letter-spacing: 3px;
+  /* text-size-adjust: ; */
+}
+
+.content p {
+  color: white;
+  font-weight: 400;
+  margin: 20px 0 26px 0;
+}
+
+.quizzical-button {
+  background-color: #dd2f38;
+  color: #f5f7fb;
+  border-radius: 15px;
+  padding: 18px 30px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.reset-button {
+  background-color: #dd2f38;
+  color: #f5f7fb;
+  width: 100%;
+  max-width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.quizzical-button:hover {
+  opacity: 0.8;
+  transition: 1s;
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 20px;
+  max-width: 800px;
+  font-family: "Karla";
+  font-weight: 800;
+  font-size: 20px;
+  color: #dd2f38;
+  overflow: auto;
+  scrollbar-color: white;
+}
+
+.quiz-container > .quizzical-button {
+  margin: 20px auto;
+}
+
+.question-group {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.answers-btn {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  border: 1.5px solid white;
+  padding: 8px 18px;
+  border-color: white;
+  border-radius: 10px;
+  background-color: transparent;
+  color: white;
+  margin-right: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.message {
+  margin: auto;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.play-again-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 15px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.play-again-container p {
+  margin: 0 10px;
+}
+
+/* button stylings */
+
+.blue {
+  background-color: #3d3d3f;
+  border: 1.5px solid transparent;
+}
+
+.faded {
+  opacity: 0.6;
+}
+
+.green {
+  background-color: #31d354;
+  border: 1.5px solid transparent;
+  opacity: 1;
+}
+.red {
+  background-color: #dd2f38;
+  border: 1.5px solid transparent;
+  opacity: 0.6;
+}
+
+.error-message {
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  color: rgb(226, 48, 48);
+}
+
+@media all and (min-width: 480px) {
+  .answers-btn {
+    padding: 8px 25px;
+  }
+
+}
+
+/* the galaxy fold and other phones */
+@media all and (max-width: 414px) {
+  .button-container {
+    flex-wrap: wrap;
+  }
+  .answers-btn {
+    margin: 0 10px 10px 0;
+    padding: 8px 18px;
+  }
+
+  .quiz-container {
+    margin: 0 auto;
+    padding-top: 40px;
+  }
+
+  .play-again-container button {
+    max-width: 140px;
+    width: 100%;
+  }
 }
